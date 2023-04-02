@@ -1,13 +1,13 @@
-import { Header } from './Header'
+import { Header } from './components/Header'
 import { useEffect, useState } from 'react'
-import { SearchResults } from './SearchResults'
-import { MoviePage } from './MoviePage'
+import { SearchResults } from './components/SearchResults'
+import { MoviePage } from './components/MoviePage'
 function App() {
     const urls = [
         './CONTENTLISTINGPAGE-PAGE1.json',
         './CONTENTLISTINGPAGE-PAGE2.json',
         './CONTENTLISTINGPAGE-PAGE3.json',
-    ]
+    ] // urls to fetch json data from
     let allMovies = []
     const [searchState, setSearchState] = useState(false)
     const [searchTerm, setSearchTerm] = useState('')
@@ -23,7 +23,9 @@ function App() {
             console.error(error)
         }
     }
-    fetchData()
+    if (searchState) {
+        fetchData()
+    }
     const [filteredData, setFilteredData] = useState(allMovies)
 
     const handleChildStateChange = (value) => {
@@ -31,13 +33,6 @@ function App() {
     }
     const handleSearch = (event) => {
         setSearchTerm(event.target.value)
-        // const filtered = allMovies.filter((item) =>
-        //     item['name']
-        //         .toLowerCase()
-        //         .includes(event.target.value.toLowerCase())
-        // )
-        // setFilteredData(filtered)
-        // console.log(filteredData)
     }
     useEffect(() => {
         const timeoutId = setTimeout(() => {
@@ -45,11 +40,11 @@ function App() {
                 item['name'].toLowerCase().includes(searchTerm.toLowerCase())
             )
             setFilteredData(filtered)
-            console.log(filteredData)
-        }, 500)
+        }, 500) // debounce search
 
         return () => clearTimeout(timeoutId)
     }, [searchTerm])
+
     return (
         <div className='container flex max-w-md '>
             <Header
