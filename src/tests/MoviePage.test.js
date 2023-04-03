@@ -6,12 +6,11 @@ global.IntersectionObserver = jest.fn(() => ({
     unobserve: jest.fn(),
     disconnect: jest.fn(),
 }))
-global.observer = jest.fn(() => ({
-    observe: jest.fn(),
-    unobserve: jest.fn(),
-    disconnect: jest.fn(),
-}))
 global.IntersectionObserver = IntersectionObserver
+
+// test('true is true', () => {
+//     expect(true).toBe(true)
+// })
 
 test('renders movie cards', async () => {
     render(<MoviePage />)
