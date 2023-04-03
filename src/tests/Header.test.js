@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { Header } from '../components/Header'
 
 test('renders default text when searchState is false', () => {
@@ -6,7 +6,7 @@ test('renders default text when searchState is false', () => {
     const onSearch = jest.fn()
     const searchState = false
 
-    const { getByText } = render(
+    render(
         <Header
             setSearchChange={setSearchChange}
             onSearch={onSearch}
@@ -14,7 +14,7 @@ test('renders default text when searchState is false', () => {
         />
     )
 
-    const defaultText = getByText('Romantic Comedy')
+    const defaultText = screen.getByText('Romantic Comedy')
     expect(defaultText).toBeInTheDocument()
 })
 
@@ -23,7 +23,7 @@ test('renders search input when searchState is true', () => {
     const onSearch = jest.fn()
     const searchState = true
 
-    const { getByTestId } = render(
+    render(
         <Header
             setSearchChange={setSearchChange}
             onSearch={onSearch}
@@ -31,7 +31,7 @@ test('renders search input when searchState is true', () => {
         />
     )
 
-    const searchInput = getByTestId('search-input')
+    const searchInput = screen.getByTestId('search-input')
     expect(searchInput).toBeInTheDocument()
 })
 
@@ -40,7 +40,7 @@ test('Back button changes SearchState', () => {
     const onSearch = jest.fn()
     const searchState = true
 
-    const { getByTestId } = render(
+    render(
         <Header
             setSearchChange={setSearchChange}
             onSearch={onSearch}
@@ -48,7 +48,7 @@ test('Back button changes SearchState', () => {
         />
     )
 
-    const backButton = getByTestId('back-button')
+    const backButton = screen.getByTestId('back-button')
     fireEvent.click(backButton)
 
     expect(setSearchChange).toHaveBeenCalledTimes(1)
