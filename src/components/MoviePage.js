@@ -43,17 +43,21 @@ export const MoviePage = () => {
         }
     }
     return (
-        <div className='grid grid-cols-3 gap-3 mt-5 justify-items-center bg-stone-950'>
+        <div
+            data-testid='movie-page'
+            className='grid grid-cols-3 gap-3 mt-5 justify-items-center bg-stone-950'
+        >
             {movies.map((movie, index) => {
                 return (
                     <Card
                         movieName={movie['name']}
                         posterUrl={movie['poster-image']}
                         key={index}
+                        data-testid={`movie-card-${index}`}
                     />
                 )
             })}
-            <div ref={loaderRef}></div>
+            <div ref={loaderRef} data-testid='loader'></div>
         </div>
     )
 }

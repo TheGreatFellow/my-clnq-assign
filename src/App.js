@@ -56,7 +56,7 @@ function App() {
                 {searchState ? (
                     <SearchResults data={filteredData} />
                 ) : (
-                    <MoviePage />
+                    <MoviePage data-testid='movie-page' />
                 )}
             </div>
         </div>

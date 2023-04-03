@@ -8,7 +8,10 @@ export const Header = ({ onSearch, setSearchChange, searchState }) => {
                 />
                 <div className='header-wrapper w-full h-16 flex flex-row justify-between items-center px-2'>
                     <div className='flex flex-row items-center'>
-                        <button onClick={() => setSearchChange(!searchState)}>
+                        <button
+                            onClick={() => setSearchChange(!searchState)}
+                            data-testid='back-button'
+                        >
                             <img
                                 src={require('../assets/Back.png')}
                                 className='w-4 h-4 m-2'
@@ -21,6 +24,7 @@ export const Header = ({ onSearch, setSearchChange, searchState }) => {
                                 name='search'
                                 placeholder='Search Movies'
                                 autoCorrect='false'
+                                data-testid='search-input'
                                 className='bg-black placeholder:text-xl text-xl text-white w-full'
                             />
                         ) : (
